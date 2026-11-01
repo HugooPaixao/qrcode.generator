@@ -1,5 +1,6 @@
 package com.hugopaixao.qrcode.generator.infrastructure;
 
+import com.hugopaixao.qrcode.generator.ports.StoragePort;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -8,13 +9,13 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Component
-public class S3StorageAdapter {
+public class S3StorageAdapter implements StoragePort {
 
     private final S3Client s3Client;
     private final String bucketName;
     private final String region;
 
-    public S3StorageAdapter(@Value("${aws.region}") String region, @Value("${aws.s3.bucket-name}") String bucketName, S3Client s3Client) {
+    public S3StorageAdapter(@Value("${aws.region}") String region, @Value("${aws.s3.bucket-name}") String bucketName) {
         this.bucketName = bucketName;
         this.region = region;
         this.s3Client = S3Client.builder()
@@ -22,6 +23,7 @@ public class S3StorageAdapter {
                 .build();
     }
 
+    @Override
     public String uploadFile(byte[] fileData, String fileName, String contentType) {
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
