@@ -5,8 +5,6 @@ A Spring Boot application that generates QR codes and stores them in AWS S3. Thi
 
 ## How to Use
 
-This section provides comprehensive instructions for setting up and running the QR Code Generator application.
-
 ### Prerequisites
 
 - Java 21 JDK
