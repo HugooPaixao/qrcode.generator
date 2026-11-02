@@ -26,8 +26,6 @@ AWS_BUCKET_NAME=your_bucket_name
 
 > **Warning:** Never commit your `.env` file. Make sure it is listed in your `.gitignore`, otherwise your AWS credentials can be exposed.
 
-Double-check the variable names: they must be exactly `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` (with two **C**s in `ACCESS`), otherwise the AWS SDK will not find your credentials.
-
 ### Running the Application
 
 #### Local Development
@@ -50,8 +48,6 @@ Double-check the variable names: they must be exactly `AWS_ACCESS_KEY_ID` and `A
    ```bash
    mvn spring-boot:run
    ```
-
-> Spring Boot does not read `.env` files by default, which is why the variables are exported in step 2. If you run the project from IntelliJ, set them in **Run > Edit Configurations > Environment variables**.
 
 #### Docker Deployment
 
@@ -113,14 +109,3 @@ Generate a QR code from the provided text and store it in AWS S3. The QR code wi
 }
 ```
 
-**Error Response**
-
-If an error occurs during QR code generation or S3 upload, the API will return a `500 Internal Server Error`.
-
-**Example Usage**
-
-```bash
-curl -X POST http://localhost:8080/qrcode \
-     -H "Content-Type: application/json" \
-     -d '{"text": "https://example.com"}'
-```
